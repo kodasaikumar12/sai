@@ -1,0 +1,50 @@
+{% extends 'users/userbase.html' %}
+{% block predict %}active{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 75vh; padding: 40px 15px;">
+    <div class="card shadow-lg border-0 w-100" style="max-width: 650px; border-radius: 20px; overflow: hidden;">
+        <div class="card-header border-0 pb-0 pt-5 text-center bg-white">
+            <div class="icon-box mb-3 mx-auto d-flex align-items-center justify-content-center"
+                style="width: 70px; height: 70px; background: rgba(79, 70, 229, 0.1); border-radius: 50%; color: var(--primary);">
+                <span class="mai-scan" style="font-size: 32px;"></span>
+            </div>
+            <h2 class="font-weight-bold mb-0" style="color: var(--dark); letter-spacing: -0.5px;">Parcel Analysis</h2>
+            <p class="text-muted mt-2">Upload an image of the parcel to detect potential damage</p>
+        </div>
+        <div class="card-body px-5 pb-5 pt-3">
+            <form method="post" enctype="multipart/form-data" class="text-center">
+                {% csrf_token %}
+                <div class="form-group mb-4">
+                    <div class="p-4"
+                        style="border: 2px dashed #D1D5DB; border-radius: 12px; background-color: var(--light); transition: var(--transition);">
+                        <span class="mai-cloud-upload d-block mb-3"
+                            style="font-size: 42px; color: var(--text-muted);"></span>
+                        <input type="file" name="image" required class="form-control-file d-block mx-auto"
+                            style="max-width: 250px;">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary px-5 py-3 shadow-sm"
+                    style="border-radius: 12px; font-weight: 600; font-size: 1.05rem;">Run Prediction</button>
+            </form>
+
+            {% if prediction %}
+            <div class="mt-5 text-center p-4 {% if prediction == 'Intact' %}bg-success-light{% else %}bg-warning-light{% endif %}"
+                style="border-radius: 16px; {% if prediction == 'Intact' %}background: rgba(16, 185, 129, 0.1);{% else %}background: rgba(245, 158, 11, 0.1);{% endif %}">
+                <h3 class="font-weight-bold mb-3" style="color: var(--dark);">Result: <span
+                        style="{% if prediction == 'Intact' %}color: var(--secondary);{% else %}color: #F59E0B;{% endif %}">{{
+                        prediction }}</span></h3>
+                {% if image_url %}
+                <div class="mb-4 mt-2 rounded overflow-hidden shadow-sm d-inline-block">
+                    <img src="{{ image_url }}" alt="Uploaded Image"
+                        style="max-width: 100%; height: auto; object-fit: cover;">
+                </div>
+                {% endif %}
+                <p class="mb-0 text-muted" style="font-size: 1.1rem;">Confidence Score: <strong
+                        style="color: var(--dark);">{{ confidence }}</strong></p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

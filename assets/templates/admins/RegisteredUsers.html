@@ -1,0 +1,121 @@
+{% extends 'admins/adminbase.html' %}
+{% block title %}User List{% endblock %}
+{% block user_list %}active{% endblock %}
+
+{% block content %}
+<!-- DataTable CSS & JS Links -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0;
+        margin-left: -2px;
+        border: none;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: none;
+        border: none;
+    }
+
+    table.dataTable {
+        border-collapse: collapse !important;
+    }
+
+    .status-badge {
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        display: inline-block;
+    }
+
+    .status-waiting {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: #F59E0B;
+    }
+
+    .status-active {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--secondary);
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').addClass('table table-hover table-bordered w-100');
+        $('table').DataTable({
+            "pageLength": 25,
+            "language": {
+                "search": "",
+                "searchPlaceholder": "Search users..."
+            }
+        });
+        $('.dataTables_filter input').addClass('form-control').css('display', 'inline-block').css('width', 'auto');
+        $('.dataTables_length select').addClass('form-control d-inline-block w-auto');
+    });
+</script>
+
+<div class="container" style="min-height: 75vh; padding: 40px 15px;">
+    <div class="card shadow-lg border-0 w-100" style="border-radius: 20px; overflow: hidden;">
+        <div class="card-header border-0 pb-3 pt-4 bg-white d-flex align-items-center">
+            <div class="icon-box mr-3 d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; color: var(--secondary);">
+                <span class="mai-people" style="font-size: 24px;"></span>
+            </div>
+            <div>
+                <h3 class="font-weight-bold mb-0" style="color: var(--dark); letter-spacing: -0.5px;">Registered Users
+                </h3>
+                <p class="text-muted mb-0" style="font-size: 0.95rem;">Manage and activate user accounts</p>
+            </div>
+        </div>
+        <div class="card-body px-4 pb-5 pt-3">
+            <div class="table-responsive">
+                <table class="table text-center table-striped">
+                    <thead style="background: rgba(243, 244, 246, 0.8);">
+                        <tr>
+                            <th scope="col" style="border-top: none;">Sno</th>
+                            <th scope="col" style="border-top: none;">Name</th>
+                            <th scope="col" style="border-top: none;">Login Id</th>
+                            <th scope="col" style="border-top: none;">Mobile</th>
+                            <th scope="col" style="border-top: none;">Email</th>
+                            <th scope="col" style="border-top: none;">Locality</th>
+                            <th scope="col" style="border-top: none;">Status</th>
+                            <th scope="col" style="border-top: none;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in data %}
+                        <tr>
+                            <td class="align-middle">{{ forloop.counter }}</td>
+                            <td class="align-middle font-weight-500">{{ user.name }}</td>
+                            <td class="align-middle">{{ user.loginid }}</td>
+                            <td class="align-middle">{{ user.mobile }}</td>
+                            <td class="align-middle">{{ user.email }}</td>
+                            <td class="align-middle text-muted">{{ user.locality }}</td>
+                            <td class="align-middle">
+                                {% if user.status == 'waiting' %}
+                                <span class="status-badge status-waiting">Waiting</span>
+                                {% else %}
+                                <span class="status-badge status-active">Activated</span>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">
+                                {% if user.status == 'waiting' %}
+                                <a class="btn btn-sm btn-primary" href="/AdminActivaUsers/?uid={{ user.id }}"
+                                    style="border-radius: 6px;">Activate</a>
+                                {% else %}
+                                <span style="color: var(--secondary);"><span
+                                        class="mai-checkmark-circle mr-1"></span>Active</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

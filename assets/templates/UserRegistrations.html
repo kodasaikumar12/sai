@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+<style>
+    .styled-form input,
+    .styled-form select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #D1D5DB;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        background-color: var(--light);
+        transition: var(--transition);
+        color: var(--text-main);
+    }
+
+    .styled-form input:focus,
+    .styled-form select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        background-color: var(--surface);
+        outline: none;
+    }
+
+    .styled-form label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-main);
+        margin-bottom: 6px;
+        display: block;
+    }
+</style>
+
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh; padding: 40px 15px;">
+    <div class="card shadow-lg border-0 w-100" style="max-width: 650px; border-radius: 20px; overflow: hidden;">
+        <div class="card-header border-0 pb-0 pt-5 text-center bg-white">
+            <div class="icon-box mb-3 mx-auto d-flex align-items-center justify-content-center"
+                style="width: 60px; height: 60px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; color: var(--secondary);">
+                <span class="mai-person-add" style="font-size: 28px;"></span>
+            </div>
+            <h2 class="font-weight-bold mb-0" style="color: var(--dark); letter-spacing: -0.5px;">Create an Account</h2>
+            <p class="text-muted mt-2">Join us to assess parcel damage efficiently.</p>
+        </div>
+        <div class="card-body px-5 pb-5 pt-3 styled-form">
+            <form action="{% url 'UserRegisterActions' %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_name">Full Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_loginid">Login ID</label>
+                        {{ form.loginid }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_email">Email Address</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_mobile">Mobile Number</label>
+                        {{ form.mobile }}
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="id_password">Password</label>
+                    {{ form.password }}
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_locality">Locality</label>
+                        {{ form.locality }}
+                    </div>
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_city">City</label>
+                        {{ form.city }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_state">State</label>
+                        {{ form.state }}
+                    </div>
+                    <div class="col-md-6 form-group mb-4">
+                        <label for="id_status">Status</label>
+                        {{ form.status }}
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="id_address">Complete Address</label>
+                    {{ form.address }}
+                </div>
+
+                <div class="form-group mt-4 mb-0 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary py-2 w-100 mr-2"
+                        style="border-radius: 8px; font-weight: 600;">Register Now</button>
+                    <button type="reset" class="btn btn-secondary py-2 w-100 ml-2"
+                        style="border-radius: 8px; font-weight: 600;">Reset Form</button>
+                </div>
+
+                {% if messages %}
+                <div class="mt-4">
+                    {% for message in messages %}
+                    <div class="alert alert-info text-center"
+                        style="border-radius: 8px; font-size: 0.9rem; margin-bottom: 0;">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </form>
+            <div class="text-center mt-4">
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0;">Already have an account? <a
+                        href="{% url 'UserLogin' %}"
+                        style="color: var(--primary); font-weight: 600; text-decoration: none;">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

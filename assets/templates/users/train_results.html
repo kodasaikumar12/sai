@@ -1,0 +1,62 @@
+{% extends 'users/userbase.html' %}
+{% block content %}
+<div class="container" style="min-height: 75vh; padding: 40px 15px;">
+    <div class="card shadow-lg border-0 w-100" style="border-radius: 20px; overflow: hidden;">
+        <div class="card-header border-0 pb-3 pt-4 bg-white text-center">
+            <div class="icon-box mb-3 mx-auto d-flex align-items-center justify-content-center"
+                style="width: 70px; height: 70px; background: rgba(79, 70, 229, 0.1); border-radius: 50%; color: var(--primary);">
+                <span class="mai-analytics" style="font-size: 32px;"></span>
+            </div>
+            <h2 class="font-weight-bold mb-0" style="color: var(--dark); letter-spacing: -0.5px;">Model Training Results
+            </h2>
+            <p class="text-muted mt-2">Evaluation metrics and performance curves</p>
+        </div>
+        <div class="card-body px-4 pb-5 pt-3">
+            <div class="text-center mb-5">
+                <div class="d-inline-block p-4"
+                    style="background: rgba(16, 185, 129, 0.1); border-radius: 16px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                    <h5 class="text-muted mb-1 text-uppercase"
+                        style="font-size: 0.85rem; font-weight: 600; letter-spacing: 1px;">Test Accuracy</h5>
+                    <h2 class="font-weight-bold mb-0" style="color: var(--secondary);">{{ accuracy }}%</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow-sm" style="background: var(--light); border-radius: 16px;">
+                        <div class="card-body text-center p-4">
+                            <h5 class="font-weight-bold mb-3" style="color: var(--dark);">Loss Curve</h5>
+                            <img src="{{ loss_plot }}" alt="Loss Plot" class="img-fluid rounded shadow-sm"
+                                style="border: 1px solid #E5E7EB;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow-sm" style="background: var(--light); border-radius: 16px;">
+                        <div class="card-body text-center p-4">
+                            <h5 class="font-weight-bold mb-3" style="color: var(--dark);">Accuracy Curve</h5>
+                            <img src="{{ acc_plot }}" alt="Accuracy Plot" class="img-fluid rounded shadow-sm"
+                                style="border: 1px solid #E5E7EB;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="card h-100 border-0 shadow-sm" style="background: var(--light); border-radius: 16px;">
+                        <div class="card-body text-center p-4">
+                            <h5 class="font-weight-bold mb-3" style="color: var(--dark);">Confusion Matrix</h5>
+                            <img src="{{ cm_plot }}" alt="Confusion Matrix" class="img-fluid rounded shadow-sm"
+                                style="border: 1px solid #E5E7EB; max-width: 600px; width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4 p-3"
+                style="background: var(--light); border-radius: 12px; font-size: 0.95rem;">
+                <span class="text-muted">Model saved at:</span> <code
+                    style="color: var(--primary); background: transparent;">{{ model_path }}</code>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

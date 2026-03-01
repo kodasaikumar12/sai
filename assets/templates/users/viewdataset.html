@@ -1,0 +1,59 @@
+{% extends 'users/userbase.html' %}
+{% block content %}
+<!-- DataTable CSS & JS Links -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0;
+        margin-left: -2px;
+        border: none;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: none;
+        border: none;
+    }
+
+    table.dataTable {
+        border-collapse: collapse !important;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table').addClass('table table-hover table-bordered w-100');
+        $('table').DataTable({
+            "pageLength": 50,
+            "language": {
+                "search": "",
+                "searchPlaceholder": "Search records..."
+            }
+        });
+        $('.dataTables_filter input').addClass('form-control').css('display', 'inline-block').css('width', 'auto');
+        $('.dataTables_length select').addClass('form-control d-inline-block w-auto');
+    });
+</script>
+
+<div class="container" style="min-height: 75vh; padding: 40px 15px;">
+    <div class="card shadow-lg border-0 w-100" style="border-radius: 20px; overflow: hidden;">
+        <div class="card-header border-0 pb-3 pt-4 bg-white d-flex align-items-center">
+            <div class="icon-box mr-3 d-flex align-items-center justify-content-center"
+                style="width: 50px; height: 50px; background: rgba(79, 70, 229, 0.1); border-radius: 50%; color: var(--primary);">
+                <span class="mai-list" style="font-size: 24px;"></span>
+            </div>
+            <div>
+                <h3 class="font-weight-bold mb-0" style="color: var(--dark); letter-spacing: -0.5px;">Dataset View</h3>
+                <p class="text-muted mb-0" style="font-size: 0.95rem;">Explore the underlying data used for
+                    classification</p>
+            </div>
+        </div>
+        <div class="card-body px-4 pb-5 pt-3">
+            <div class="table-responsive">
+                {{ data|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

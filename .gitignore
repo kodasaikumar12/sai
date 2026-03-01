@@ -1,0 +1,10 @@
+venv/
+media/
+dataset/
+*.h5
+*.pth
+*.pt
+*.zip
+*.rar
+__pycache__/
+db.sqlite3

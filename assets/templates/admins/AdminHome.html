@@ -1,0 +1,33 @@
+{% extends 'admins/adminbase.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+{% block admin_home %}active{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 75vh; padding: 40px 15px;">
+    <div class="card shadow-lg border-0 w-100 text-center"
+        style="max-width: 600px; border-radius: 20px; overflow: hidden;">
+        <div class="card-header border-0 pb-0 pt-5 bg-white">
+            <div class="icon-box mb-3 mx-auto d-flex align-items-center justify-content-center"
+                style="width: 70px; height: 70px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; color: var(--secondary);">
+                <span class="mai-shield-checkmark" style="font-size: 32px;"></span>
+            </div>
+            <h1 class="font-weight-bold mb-3" style="color: var(--dark); letter-spacing: -0.5px;">Admin Panel</h1>
+            <p class="text-muted" style="font-size: 1.1rem;">Welcome to the Administrative Dashboard</p>
+        </div>
+        <div class="card-body px-5 pb-5 pt-3">
+            <p class="text-muted mb-5">Manage users, view system analytics, and ensure the smooth operation of the
+                parcel classification system.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <a href="{% url 'ViewRegisteredUsers' %}"
+                        class="btn btn-secondary btn-block px-4 py-3 shadow-sm d-flex align-items-center justify-content-center"
+                        style="border-radius: 12px; font-weight: 600; font-size: 1.05rem;">
+                        <span class="mai-people mr-3" style="font-size: 24px;"></span> View Registered Users
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

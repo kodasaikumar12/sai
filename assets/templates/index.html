@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Parcel Damage Classification | Home
+{% endblock %}
+{% block home_page %}
+active
+{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="page-section d-flex align-items-center"
+    style="min-height: 85vh; background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.1), transparent 50%), radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.1), transparent 50%); position: relative; overflow: hidden;">
+    <div class="container position-relative" style="z-index: 1;">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-left mb-5 mb-lg-0 pr-lg-5">
+                <span class="badge px-3 py-2 mb-3"
+                    style="background: rgba(79, 70, 229, 0.1); color: var(--primary); font-weight: 600; border-radius: 20px;">AI-Powered
+                    Logistics</span>
+                <h1 class="display-4 font-weight-bold mb-4"
+                    style="color: var(--dark); line-height: 1.2; letter-spacing: -1px;">
+                    Automated <span style="color: var(--primary);">Parcel Damage</span> Classification
+                </h1>
+                <p class="lead mb-4" style="color: var(--text-muted); font-size: 1.15rem; max-width: 500px;">
+                    Helping logistics companies, retailers, and insurers quickly assess and categorize parcel damage
+                    with cutting-edge Deep Learning.
+                </p>
+                <div class="d-flex align-items-center">
+                    <a class="btn btn-primary btn-lg mr-3 shadow-lg" href="{% url 'UserRegister' %}"
+                        style="padding: 12px 30px; font-size: 1.05rem;">Get Started</a>
+                    <a class="btn btn-secondary btn-lg" href="{% url 'UserLogin' %}"
+                        style="padding: 12px 30px; font-size: 1.05rem;">Login</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 bg-transparent shadow-none">
+                    <div class="position-relative"
+                        style="border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transform: perspective(1000px) rotateY(-5deg); transition: transform 0.5s ease;">
+                        <div class="position-absolute w-100 h-100"
+                            style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), transparent); z-index: 1;">
+                        </div>
+                        <img src="{% static 'img/box5.jpg' %}" alt="Example of a damaged parcel" class="img-fluid w-100"
+                            style="display: block; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="page-section py-5" style="background-color: var(--surface); position: relative;">
+    <div class="container my-5">
+        <div class="text-center mb-5">
+            <h2 class="font-weight-bold" style="font-size: 2.25rem; color: var(--dark); letter-spacing: -0.5px;">Why
+                Choose Our Platform?</h2>
+            <div class="mx-auto mt-3" style="width: 60px; height: 4px; background: var(--primary); border-radius: 2px;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="card h-100 text-center p-4 border-0"
+                    style="background: var(--light); border-radius: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div class="icon-box mb-4 mx-auto d-flex align-items-center justify-content-center"
+                        style="width: 70px; height: 70px; background: rgba(79, 70, 229, 0.1); border-radius: 50%; color: var(--primary);">
+                        <span class="mai-options" style="font-size: 32px;"></span>
+                    </div>
+                    <h4 class="font-weight-bold mb-3">Accurate Analysis</h4>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Leverage cutting-edge algorithms to
+                        precisely classify parcel damage, ensuring highly reliable results for insurance claims.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <div class="card h-100 text-center p-4 border-0"
+                    style="background: var(--light); border-radius: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div class="icon-box mb-4 mx-auto d-flex align-items-center justify-content-center"
+                        style="width: 70px; height: 70px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; color: var(--secondary);">
+                        <span class="mai-earth" style="font-size: 32px;"></span>
+                    </div>
+                    <h4 class="font-weight-bold mb-3">User-Friendly</h4>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Designed for optimal ease of use. Upload
+                        images and receive instant damage assessments without training.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center p-4 border-0"
+                    style="background: var(--light); border-radius: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div class="icon-box mb-4 mx-auto d-flex align-items-center justify-content-center"
+                        style="width: 70px; height: 70px; background: rgba(245, 158, 11, 0.1); border-radius: 50%; color: #F59E0B;">
+                        <span class="mai-time" style="font-size: 32px;"></span>
+                    </div>
+                    <h4 class="font-weight-bold mb-3">Fast Processing</h4>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Save valuable time with rapid analysis,
+                        enabling quick logistical operations and seamless decision-making.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call-to-Action Section -->
+<section class="page-section py-5 mt-4"
+    style="background: linear-gradient(135deg, var(--dark) 0%, #1f2937 100%); position: relative; overflow: hidden; border-radius: 30px; margin: 0 15px 40px 15px;">
+    <div class="position-absolute w-100 h-100"
+        style="background: radial-gradient(circle at center, rgba(79, 70, 229, 0.2), transparent 60%); top: 0; left: 0;">
+    </div>
+    <div class="container text-center position-relative py-5">
+        <h2 class="font-weight-bold mb-3" style="color: #ffffff; font-size: 2.5rem; letter-spacing: -0.5px;">Ready to
+            transform your process?</h2>
+        <p class="mb-5 mx-auto" style="color: rgba(255,255,255,0.7); font-size: 1.1rem; max-width: 600px;">
+            Join our platform to streamline your parcel damage assessment. Register now to explore our AI-powered
+            classification tools.
+        </p>
+        <a class="btn btn-primary btn-lg shadow-lg" href="{% url 'UserRegister' %}"
+            style="padding: 12px 40px; font-size: 1.1rem; border-radius: 12px;">Create an Account</a>
+    </div>
+</section>
+{% endblock %}
