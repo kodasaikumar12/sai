@@ -73,15 +73,27 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 import os
+import gdown
 
-# Load model once
+# Model path
 MODEL_PATH = os.path.join(settings.BASE_DIR, 'models', 'resnet34_model.h5')
 
-model = load_model(MODEL_PATH)
-class_names = ['Intact', 'Damaged']
-class_names = ['Intact', 'Damaged']
+# Download model if it does not exist
+if not os.path.exists(MODEL_PATH):
+    os.makedirs(os.path.join(settings.BASE_DIR, 'models'), exist_ok=True)
 
+    url = "https://drive.google.com/uc?id=1eVYOlAPnP-s13KzNg2t8jaBPYB9zvsgW"
+
+    print("Downloading AI model from Google Drive...")
+
+    gdown.download(url, MODEL_PATH, quiet=False)
+
+# Load model
+model = load_model(MODEL_PATH)
+
+class_names = ['Intact', 'Damaged']
 # Prediction view
 def predict_view(request):
     context = {}
