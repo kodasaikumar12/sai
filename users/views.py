@@ -94,7 +94,15 @@ if not os.path.exists(MODEL_PATH):
     gdown.download(url, MODEL_PATH, quiet=False)
 
 # Load model
-model = load_model(MODEL_PATH)
+# Lazy load model
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        from tensorflow.keras.models import load_model
+        model = load_model(MODEL_PATH)
+    return model
 
 class_names = ['Intact', 'Damaged']
 # Prediction view
@@ -113,7 +121,9 @@ def predict_view(request):
         img_array = np.expand_dims(img_array, axis=0)
 
         # Predict
+        model = get_model()
         prediction = model.predict(img_array)[0]
+
         if len(prediction) == 1:  # sigmoid
             predicted_class = class_names[int(prediction > 0.5)]
             confidence = float(prediction) if prediction > 0.5 else 1 - float(prediction)
