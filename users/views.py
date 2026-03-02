@@ -5,19 +5,6 @@ from django.contrib import messages
 from .models import UserRegistrationModel
 from django.core.files.storage import FileSystemStorage
 import os
-
-
-import pandas as pd
-import numpy as np
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import accuracy_score, classification_report
 from django.shortcuts import render
 from django.conf import settings
 
@@ -74,11 +61,6 @@ def UserHome(request):
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-from django.shortcuts import render
-from django.core.files.storage import FileSystemStorage
-from django.conf import settings
-import os
-import gdown
 
 # Model path
 MODEL_PATH = os.path.join(settings.BASE_DIR, 'models', 'resnet34_model.h5')
@@ -94,17 +76,24 @@ if not os.path.exists(MODEL_PATH):
     gdown.download(url, MODEL_PATH, quiet=False)
 
 # Load model
-# Lazy load model
 model = None
 
 def get_model():
     global model
-    if model is None:
-        from tensorflow.keras.models import load_model
-        model = load_model(MODEL_PATH)
-    return model
 
-class_names = ['Intact', 'Damaged']
+    if model is None:
+
+        if not os.path.exists(MODEL_PATH):
+            os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+
+            url = "https://drive.google.com/uc?id=1eVYOlAPnP-s13KzNg2t8jaBPYB9zvsgW"
+            print("Downloading AI model from Google Drive...")
+            gdown.download(url, MODEL_PATH, quiet=True)
+
+        from tensorflow.keras.models import load_model
+        model = load_model(MODEL_PATH, compile=False)
+
+    return model
 # Prediction view
 def predict_view(request):
     context = {}
